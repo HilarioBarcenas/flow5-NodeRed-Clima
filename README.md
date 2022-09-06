@@ -28,26 +28,39 @@ Enlaces de apoyo para las configuraciones:
 4. **Instalación de Broker local Mosquitto MQTT.**
 5. **Cuenta de OpenWeather.** Es necesario tener una cuenta creada en OpenWeather, la cual nos proporcionará la información de temperatura y humedad.
 6. **Coordenadas (latitud y longitud) de algún lugar. **
+7. **Usar HiveMQ como broker público**
 
 ### Intrucciones de preparación del entorno
 1. Arrancar NodeRed con el comando `node-red`
 2. Importar el flow desde el repositorio
-3. Hacer clic en el boton Deploy
-4. Agregamos un nodo inject y un http request
+3. Agregamos un nodo inject y un http request
+4. Actualizar la IP del broker público.
+5. Hacer clic en el boton Deploy.
 
 ### Intrucciones de operación
 - Para observar el resultado del flow, es necesario abrir un navegador  y dirigirse a localhost:1880/ui
 - Con la API que obtenemos en la documentación `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}`, colocamos las coordenadas de latitud en (lat) y longitud en (lon), así como la API key que obtenes al crear la cuenta en OpenWeather.
+- Para poder actualizar la IP del broker público, utilizamos el comando `nslookup broker.hivemq.com` (aunque podemos utilizar cualquier broker público ).
 - Colocamos la URL en el nodo http request.
 - En el inject (timestamp) configuramos el intervalo para que este mande un mensaje cada minuto al nodo http request.
 - Cambiamos los nodos de function con el siguiente código `msg.payload = msg.payload.main.temp;`
+### Notas
+
+Fue necesario que varios usuarios se conectaran al broker HiveMQ, así todos estarían enviando datos del clima de su localidad cercana (o cualquier localidad de referencia).
 
 ### Resultados y Evidencias
 **Nodos del flow**
-![](https://github.com/HilarioBarcenas/flow5-NodeRed-Clima/blob/main/NodosFlow5.png?raw=true)
+![](https://github.com/HilarioBarcenas/flow5-NodeRed-Clima/blob/main/Capturas%20de%20pantalla/NodosFlow5.png?raw=true)
 
 **Tablero resulado del flow**
-![](https://github.com/HilarioBarcenas/flow5-NodeRed-Clima/blob/main/DashboardFlow5.png?raw=true)
+![](https://github.com/HilarioBarcenas/flow5-NodeRed-Clima/blob/main/Capturas%20de%20pantalla/DashboardFlow5.png?raw=true)
+
+**Tablero resultado del flow público con múltiples usuarios**
+![](https://github.com/HilarioBarcenas/flow5-NodeRed-Clima/blob/main/Capturas%20de%20pantalla/DashboardFlow5P%C3%BAblico.png?raw=true)
+
+### Evidencias
+
+[YouTube](https://www.youtube.com/watch?v=F3Sx-XV14Nk "YouTube")
 
 ### Créditos
 **Desarrollado por** `Hilario Barcenas`
